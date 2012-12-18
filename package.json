@@ -1,0 +1,25 @@
+{
+  "name": "large-decimal",
+  "version": "0.0.0",
+  "description": "Arbitrary decimal math",
+  "main": "src",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --compilers coffee:coffee-script -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jussi-kalliokoski/large-decimal.js"
+  },
+  "keywords": [
+    "decimal",
+    "big",
+    "bigdecimal",
+    "large",
+    "arbitrary"
+  ],
+  "author": "Jussi Kalliokoski",
+  "license": "MIT"
+}
