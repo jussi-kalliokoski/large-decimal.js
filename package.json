@@ -20,6 +20,11 @@
     "large",
     "arbitrary"
   ],
+  "devDependencies": {
+    "mocha": "1.7.x",
+    "should": "*",
+    "coffee": "1.2.0"
+  },
   "author": "Jussi Kalliokoski",
   "license": "MIT"
 }

@@ -1,5 +1,3 @@
-before_install:
-  - sudo npm install -g coffee-script mocha should
 language: node_js
 node_js:
   - 0.6
