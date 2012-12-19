@@ -1,6 +1,6 @@
 # large-decimal.js
 
-[![Build Status](https://secure.travis-ci.org/quinnirill/large-decimal.js.png?branch=master)](https://travis-ci.org/jussi-kalliokoski/large-decimal.js)
+[![Build Status](https://travis-ci.org/jussi-kalliokoski/large-decimal.js.png?branch=master)](https://travis-ci.org/jussi-kalliokoski/large-decimal.js)
 
 A simple library for manipulating arbitrary numbers in JS. WIP.
 
