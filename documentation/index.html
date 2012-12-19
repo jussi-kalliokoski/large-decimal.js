@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>large-decimal.js Documentation</title>
+
+	<style>
+html {
+	font-family:sans-serif;
+}
+
+a {
+	color: blue;
+}
+
+span.type {
+	color: green;
+	font-weight: bold;
+}
+span.optional {
+	color: darkgray;
+	font-style: italic;
+}
+	</style>
+</head>
+<body>
+<section class="class" id="Decimal"><h1>class <a href="#Decimal">Decimal</a></h1><p>A Decimal class for managing arbitrary-sized numbers.</p><h4>Arguments</h4><ul class="arguments"><li><span class="optional">optional</span> <span class="type">String,Number,Decimal</span> <span>arg</span><p>The default value of the new Decimal.</p></li></ul><h2 id="Decimal-methods">Methods</h2><ul class="methods"><li><h3 id="Decimal#toString"><a href="#Decimal#toString">toString</a> ()</h3><p>Provides a String representation of a Decimal.</p></li><li><h3 id="Decimal#toNumber"><a href="#Decimal#toNumber">toNumber</a> ()</h3><p>Provides a Number representation of a Decimal.</p></li><li><h3 id="Decimal#setString"><a href="#Decimal#setString">setString</a> (str)</h3><p>Sets the Decimal's value from a String.</p><h4>Arguments</h4><ul class="arguments"><li><span class="type">String</span> <span>str</span><p>A String representation of a Decimal.</p></li></ul></li><li><h3 id="Decimal#setNumber"><a href="#Decimal#setNumber">setNumber</a> (num)</h3><p>Sets the Decimal's value from a Number.</p><h4>Arguments</h4><ul class="arguments"><li><span class="type">Number</span> <span>num</span><p>A Number representation of a Decimal.</p></li></ul></li><li><h3 id="Decimal#copy"><a href="#Decimal#copy">copy</a> ()</h3><p>Creates a copy of the Decimal.</p></li><li><h3 id="Decimal#eq"><a href="#Decimal#eq">eq</a> (dec)</h3><p>Checks whether the Decimal represents the same number as another Decimal.</p><h4>Arguments</h4><ul class="arguments"><li><span class="type">Decimal</span> <span>dec</span><p>The Decimal to compare with.</p></li></ul></li><li><h3 id="Decimal#neg"><a href="#Decimal#neg">neg</a> ()</h3><p>Creates a negation of the Decimal.</p></li><li><h3 id="Decimal#negSelf"><a href="#Decimal#negSelf">negSelf</a> ()</h3><p>Flips the sign of the Decimal.</p></li><li><h3 id="Decimal#sign"><a href="#Decimal#sign">sign</a> ()</h3><p>Creates a copy of the Decimal, preserving only the sign.</p></li><li><h3 id="Decimal#signSelf"><a href="#Decimal#signSelf">signSelf</a> ()</h3><p>Sets the value of the Decimal to one, preserving sign.</p></li><li><h3 id="Decimal#prepare"><a href="#Decimal#prepare">prepare</a> ()</h3><p>Clears unnecessary information from the Decimal's data, such as leading/trailing zeroes.</p></li></ul><h2 id="Decimal-static-methods">Static Methods</h2><ul class="methods"><li><h3 id="Decimal.cropZeroes"><a href="#Decimal.cropZeroes">cropZeroes</a> (str)</h3><p>Collects leading and trailing zeroes off a string to make it a valid number.</p><h4>Arguments</h4><ul class="arguments"><li><span class="type">String</span> <span>str</span><p>The string to crop.</p></li></ul></li><li><h3 id="Decimal.padZeroes"><a href="#Decimal.padZeroes">padZeroes</a> (num, length)</h3><p>Pads a Number with zeroes up to a specified length.</p><h4>Arguments</h4><ul class="arguments"><li><span class="type">Number</span> <span>num</span><p>The number to pad.</p></li><li><span class="type">Number</span> <span>length</span><p>The length to pad the number to.</p></li></ul></li><li><h3 id="Decimal.padDecimals"><a href="#Decimal.padDecimals">padDecimals</a> (str, length)</h3><p>Shifts a number from a String to fit a slot of a specified size.</p><h4>Arguments</h4><ul class="arguments"><li><span class="type">String</span> <span>str</span><p>The number.</p></li><li><span class="type">Number</span> <span>length</span><p>The slot size to pad for.</p></li></ul></li><li><h3 id="Decimal.addMath"><a href="#Decimal.addMath">addMath</a> (name, func)</h3><p>Adds a Math library function to the Decimal class, automatically providing Decimal#name and Decimal#nameSelf methods to the prototype.</p><h4>Arguments</h4><ul class="arguments"><li><span class="type">String</span> <span>name</span><p>The name of the Math function.</p></li><li><span class="type">Function</span> <span>func</span><p>The Math function (Decimal target, Decimal a, Decimal b)</p></li></ul></li><li><h3 id="Decimal.fromString"><a href="#Decimal.fromString">fromString</a> (arg)</h3><p>Creates a Decimal from a String.</p><h4>Arguments</h4><ul class="arguments"><li><span class="type">String</span> <span>arg</span><p>The String to create the Decimal from.</p></li></ul></li><li><h3 id="Decimal.fromNumber"><a href="#Decimal.fromNumber">fromNumber</a> (arg)</h3><p>Creates a Decimal from a Number.</p><h4>Arguments</h4><ul class="arguments"><li><span class="type">Number</span> <span>arg</span><p>The Number to create the Decimal from.</p></li></ul></li></ul></section></body>
+</html>
