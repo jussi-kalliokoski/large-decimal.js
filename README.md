@@ -15,6 +15,10 @@ A simple library for manipulating arbitrary numbers in JS. WIP.
 
 See the [online documentation](http://jussi-kalliokoski.github.com/large-decimal.js/documentation/).
 
+## Filing Bugs / Contributing
+
+You can just file an issue in the [issue tracker](https://github.com/jussi-kalliokoski/large-decimal.js/issues), but if you want to put more effort into it, see the [Contributor's Guide](https://github.com/jussi-kalliokoski/large-decimal.js/blob/master/CONTRIBUTE.md).
+
 ## License
 
 MIT License
