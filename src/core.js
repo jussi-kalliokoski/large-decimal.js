@@ -1,5 +1,12 @@
-function Decimal (arg) {
-	switch (typeof arg) {
+/**
+ * A Decimal class for managing arbitrary-sized numbers.
+ *
+ * @class
+ *
+ * @arg {String,Number,Decimal} !arg The default value of the new Decimal.
+*/
+function Decimal (num) {
+	switch (typeof num) {
 	case "undefined":
 		if (this instanceof Decimal) {
 			this.setNumber(0)
@@ -8,12 +15,12 @@ function Decimal (arg) {
 			return new Decimal()
 		}
 	case "string":
-		return Decimal.fromString(arg)
+		return Decimal.fromString(num)
 	case "number":
-		return Decimal.fromNumber(arg)
+		return Decimal.fromNumber(num)
 	default:
-		if (arg instanceof Decimal) {
-			return arg.copy()
+		if (num instanceof Decimal) {
+			return num.copy()
 		}
 	}
 
@@ -23,6 +30,17 @@ function Decimal (arg) {
 Decimal.CHUNK_SIZE = 5
 Decimal.Math = {}
 
+/**
+ * Collects leading and trailing zeroes off a string to make it a valid number.
+ *
+ * @name cropZeroes
+ * @method Decimal
+ * @static
+ *
+ * @arg {String} str The string to crop.
+ *
+ * @return {String} A valid number in a String.
+*/
 Decimal.cropZeroes = function (str) {
 	var p = str[0] === '-' ? '-' : ''
 	var s = ~~!!p
@@ -47,15 +65,49 @@ Decimal.cropZeroes = function (str) {
 	return p + str
 }
 
+/**
+ * Pads a Number with zeroes up to a specified length.
+ *
+ * @name padZeroes
+ * @method Decimal
+ * @static
+ *
+ * @arg {Number} num The number to pad.
+ * @arg {Number} length The length to pad the number to.
+ *
+ * @return {String} The padded string.
+*/
 Decimal.padZeroes = function (num, length) {
 	var str = String(num)
 	return Array(length - str.length + 1).join('0') + str
 }
 
+/**
+ * Shifts a number from a String to fit a slot of a specified size.
+ *
+ * @name padDecimals
+ * @method Decimal
+ * @static
+ *
+ * @arg {String} str The number.
+ * @arg {Number} length The slot size to pad for.
+ *
+ * @return {Number} The padded number.
+*/
 Decimal.padDecimals = function (str, length) {
 	return parseInt(str, 10) * Math.pow(10, length - str.length)
 }
 
+/**
+ * Adds a Math library function to the Decimal class, automatically providing Decimal#name and Decimal#nameSelf methods to the prototype.
+ *
+ * @name addMath
+ * @method Decimal
+ * @static
+ *
+ * @arg {String} name The name of the Math function.
+ * @arg {Function} func The Math function (Decimal target, Decimal a, Decimal b)
+*/
 Decimal.addMath = function (name, func) {
 	Decimal.Math[name] = function (tgt) {
 		func.apply(null, arguments)
@@ -76,6 +128,17 @@ Decimal.addMath = function (name, func) {
 	}
 }
 
+/**
+ * Creates a Decimal from a String.
+ *
+ * @name fromString
+ * @method Decimal
+ * @static
+ *
+ * @arg {String} arg The String to create the Decimal from.
+ *
+ * @return {Decimal} A new Decimal.
+*/
 Decimal.fromString = function (arg) {
 	var dec = new Decimal()
 	dec.setString(arg)
@@ -83,6 +146,18 @@ Decimal.fromString = function (arg) {
 	return dec
 }
 
+
+/**
+ * Creates a Decimal from a Number.
+ *
+ * @name fromNumber
+ * @method Decimal
+ * @static
+ *
+ * @arg {Number} arg The Number to create the Decimal from.
+ *
+ * @return {Decimal} A new Decimal.
+*/
 Decimal.fromNumber = function (arg) {
 	var dec = new Decimal()
 	dec.setNumber(arg)
@@ -90,6 +165,14 @@ Decimal.fromNumber = function (arg) {
 	return dec
 }
 
+/**
+ * Provides a String representation of a Decimal.
+ *
+ * @name toString
+ * @method Decimal
+ *
+ * @return {String} The String representation of the Decimal.
+*/
 Decimal.prototype.toString = function () {
 	var s = this._sign ? '-' : ''
 
@@ -108,10 +191,26 @@ Decimal.prototype.toString = function () {
 	return Decimal.cropZeroes(s)
 }
 
+/**
+ * Provides a Number representation of a Decimal.
+ *
+ * @name toNumber
+ * @method Decimal
+ *
+ * @return {Number} The Number representation of the Decimal.
+*/
 Decimal.prototype.toNumber = function () {
 	return parseFloat(this.toString(), 10)
 }
 
+/**
+ * Sets the Decimal's value from a String.
+ *
+ * @name setString
+ * @method Decimal
+ *
+ * @arg {String} str A String representation of a Decimal.
+*/
 Decimal.prototype.setString = function (str) {
 	this._sign = str[0] === '-'
 
@@ -140,11 +239,27 @@ Decimal.prototype.setString = function (str) {
 	this.prepare()
 }
 
+/**
+ * Sets the Decimal's value from a Number.
+ *
+ * @name setNumber
+ * @method Decimal
+ *
+ * @arg {Number} num A Number representation of a Decimal.
+*/
 Decimal.prototype.setNumber = function (num) {
 	this.setString(String(num))
 }
 
-Decimal.prototype.copy = function (str) {
+/**
+ * Creates a copy of the Decimal.
+ *
+ * @name copy
+ * @method Decimal
+ *
+ * @return {Decimal} A fresh copy of the Decimal.
+*/
+Decimal.prototype.copy = function () {
 	var dec = new Decimal()
 	dec._sign = this._sign
 	dec._data = this._data.slice()
@@ -153,29 +268,73 @@ Decimal.prototype.copy = function (str) {
 	return dec
 }
 
+/**
+ * Checks whether the Decimal represents the same number as another Decimal.
+ *
+ * @name eq
+ * @method Decimal
+ *
+ * @arg {Decimal} dec The Decimal to compare with.
+ *
+ * @return {Boolean} Boolean for whether the two Decimals were equal.
+*/
 Decimal.prototype.eq = function (dec) {
 	return dec.toString() === this.toString()
 }
 
+/**
+ * Creates a negation of the Decimal.
+ *
+ * @name neg
+ * @method Decimal
+ *
+ * @return {Decimal} A negated copy of the decimal.
+*/
 Decimal.prototype.neg = function () {
 	var dec = this.copy()
 	dec.negSelf()
 	return dec
 }
 
+/**
+ * Flips the sign of the Decimal.
+ *
+ * @name negSelf
+ * @method Decimal
+*/
 Decimal.prototype.negSelf = function () {
 	this._sign = !this._sign
 }
 
+/**
+ * Creates a copy of the Decimal, preserving only the sign.
+ *
+ * @name sign
+ * @method Decimal
+ *
+ * @return {Decimal} A new Decimal with the Decimal's sign, but "1" as value.
+*/
 Decimal.prototype.sign = function () {
 	return Decimal(this._sign ? '-1' : '1')
 }
 
+/**
+ * Sets the value of the Decimal to one, preserving sign.
+ *
+ * @name signSelf
+ * @method Decimal
+*/
 Decimal.prototype.signSelf = function () {
 	this._data = [1]
 	this._point = 1
 }
 
+/**
+ * Clears unnecessary information from the Decimal's data, such as leading/trailing zeroes.
+ *
+ * @name prepare
+ * @method Decimal
+*/
 Decimal.prototype.prepare = function () {
 	var data = this._data
 
