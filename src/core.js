@@ -11,9 +11,9 @@ function Decimal (num) {
 		if (this instanceof Decimal) {
 			this.setNumber(0)
 			return
-		} else {
-			return new Decimal()
 		}
+
+		return new Decimal()
 	case "string":
 		return Decimal.fromString(num)
 	case "number":
@@ -41,15 +41,16 @@ Decimal.cropZeroes = function (str) {
 	var p = str[0] === '-' ? '-' : ''
 	var s = ~~!!p
 	var l = str.length
+	var i
 
 	if (/^-?0+$/.test(str)) return p + '0'
 
-	for (var i=s; i<str.length && str[i] === '0'; i++) {
+	for (i=s; i<str.length && str[i] === '0'; i++) {
 		s += 1
 		l -= 1
 	}
 
-	for (var i=str.length-1; i > 0 && str[i] === '0'; i--) {
+	for (i=str.length-1; i > 0 && str[i] === '0'; i--) {
 		l -= 1
 	}
 
@@ -147,9 +148,10 @@ Decimal.fromNumber = function (arg) {
  * @return {String} The String representation of the Decimal.
 */
 Decimal.prototype.toString = function () {
+	var i
 	var s = this._sign ? '-' : ''
 
-	for (var i=0; i<this._point; i++) {
+	for (i=0; i<this._point; i++) {
 		s += Decimal.padZeroes(this._data[i], Decimal.CHUNK_SIZE)
 	}
 
@@ -157,7 +159,7 @@ Decimal.prototype.toString = function () {
 
 	s += '.'
 
-	for (var i=this._point; i<this._data.length; i++) {
+	for (i=this._point; i<this._data.length; i++) {
 		s += Decimal.padZeroes(this._data[i], Decimal.CHUNK_SIZE)
 	}
 
@@ -186,11 +188,13 @@ Decimal.prototype.setString = function (str) {
 	var d = str.split('.')
 	var data = this._data = []
 
-	for (var i=0; i<d[0].length; i+=Decimal.CHUNK_SIZE) {
-		var l = Decimal.CHUNK_SIZE
+	var i, s, l
+
+	for (i=0; i<d[0].length; i+=Decimal.CHUNK_SIZE) {
+		l = Decimal.CHUNK_SIZE
 		if (d[0].length - i < l) l = d[0].length - i
 
-		var s = d[0].substr(-i - Decimal.CHUNK_SIZE, l)
+		s = d[0].substr(-i - Decimal.CHUNK_SIZE, l)
 		data.unshift(parseInt(s, 10))
 	}
 
@@ -198,8 +202,8 @@ Decimal.prototype.setString = function (str) {
 
 	if (d.length === 1) return
 
-	for (var i=0; i<d[1].length; i+=Decimal.CHUNK_SIZE) {
-		var s = d[1].substr(i, Decimal.CHUNK_SIZE)
+	for (i=0; i<d[1].length; i+=Decimal.CHUNK_SIZE) {
+		s = d[1].substr(i, Decimal.CHUNK_SIZE)
 		data.push(Decimal.padDecimals(s, Decimal.CHUNK_SIZE))
 	}
 
